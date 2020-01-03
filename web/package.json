@@ -1,0 +1,24 @@
+{
+  "name": "attendence",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "body-parser": "*",
+    "cors": "*",
+    "dotenv": "^8.1.0",
+    "express": "*",
+    "express-handlebars": "*",
+    "jsonwebtoken": "*",
+    "mongodb": "^3.2.7",
+    "bcrypt": "^3.0.7",
+    "ejs": "^3.0.1"
+  }
+}
