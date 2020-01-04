@@ -20,5 +20,10 @@
     "mongodb": "^3.2.7",
     "bcrypt": "^3.0.7",
     "ejs": "^3.0.1"
+  },
+  "dependencies": {
+    "email-verifier": "^0.4.1",
+    "gmail-send": "^1.8.10",
+    "nodemailer": "^6.4.2"
   }
 }

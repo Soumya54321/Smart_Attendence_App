@@ -1,0 +1,23 @@
+.form-control{
+    width: 30%;
+}
+
+body{
+    background-color: #c5f5f6;
+}
+
+
+.input-group{
+    width: 70%;
+    margin-left: 20%;
+    
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="navbar-brand"] {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 25px;
+    }
+  }
