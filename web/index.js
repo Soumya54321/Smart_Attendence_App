@@ -31,6 +31,8 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     app.get('/',(req,res)=>{
         //res.render('app.ejs',{name: "Soumya"})
     })
+
+    app.use(express.static(__dirname+'/public'))
     
     app.get('/login',(req,res)=>{
         res.render('login.ejs')
