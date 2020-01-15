@@ -1,7 +1,7 @@
 var n;
 var n1;
 
-$('.form-check-input').on('change', function() {
+/* $('.form-check-input').on('change', function() {
     $('.form-check-input').not(this).prop('checked', false);  
 });
 
@@ -17,10 +17,7 @@ function check() {
         
     }
     
-}
-
-document.getElementById("register_form1").style.visibility = "hidden";
-document.getElementById("register_form").style.visibility = "hidden";
+} */
 
 
 function limit(){

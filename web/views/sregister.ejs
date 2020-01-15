@@ -3,12 +3,10 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>FacultyRegister</title>
+		<title>StudentRegister</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-		<link rel="stylesheet" href="/css/register.css"/>
-    </head>
-    
-
+		<link rel="stylesheet" href="css/register.css"/>
+	</head>
 	
 	<body >
 
@@ -23,41 +21,46 @@
 						<a class="nav-link lead" href="/home">Home</a>
                     </li>
 					<li class="nav-item active">
-						<a class="nav-link lead" href="/login">Login</a>
+						<a class="nav-link lead" href="/slogin">Login</a>
                     </li>
 				</ul>
 			</div>
 		</nav>
 
-
         <div class="d-flex flex-column bd-highlight mb-3">
             <div class="p-5 bd-highlight fit-to-screen">
-				<p class="text-center"><h1>Faculty Registration Forum</h1></p>
-                <form id="register_form" method="POST" action="/teacher_register">
+				<p class="text-center"><h1>Student Registration Forum</h1></p>
+				<div class="p-2 bd-highlight">
+					
+				</div>
+                <form id="register_form1" method="POST" action="/student_register">
                     <div class="form-group">
                         <label for="exampleInputName"><strong>Name</strong></label>
-                        <input type="text" class="form-control" id="exampleInputName" placeholder="Enter name" name="name" required>
+                        <input type="text" class="form-control" id="exampleInputName" placeholder="Enter name" name="name">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputDepartment"><strong>Department</strong></label>
-                        <input type="text" class="form-control" id="exampleInputDepartment" placeholder="Enter department" name="department" required>
+                        <input type="text" class="form-control" id="exampleInputDepartment" placeholder="Enter department" name="department">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputYear"><strong>Year</strong></label>
+                        <input type="text" class="form-control" id="exampleInputYear" placeholder="Enter year" name="year">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputRoll"><strong>Roll number</strong></label>
+                        <input type="text" class="form-control" id="exampleInputRoll" placeholder="Enter roll" name="roll">
 					</div>
 					<div class="form-group">
                         <label for="exampleInputContact"><strong>Contact</strong></label>
-                        <input type="text" class="form-control" id="exampleInputContact" placeholder="Enter contact number" maxlength="10" name="contact" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1"><strong>Email address</strong></label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
-                        <small id="emailHelp" class="form-text text-body">We'll never share your email with anyone else.</small>
+                        <input type="text" class="form-control" id="exampleInputContact" placeholder="Enter contact number" name="contact">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1"><strong>Password</strong></label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword2"><strong>Confirm Password</strong></label>
-                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password" required>
+                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-primary" id="abc" onclick="limit()">Generate OTP</button>
@@ -66,14 +69,17 @@
                         <button type="submit" class="btn btn-primary" id="abcd" style="visibility: hidden;" value="Create Account">Register</button>
                     </div>
                 </form>
+                <div class="p-2 bd-highlight">
+					
+				</div>
             </div>
         </div>
 
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
         <script type="text/javascript" src="/js/register.js"></script>
-
+        
 	</body>
 </html>

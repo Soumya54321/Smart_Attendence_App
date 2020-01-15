@@ -28,28 +28,30 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     teachers=db.collection('teachers');
     students=db.collection('students');
 
-    app.get('/',(req,res)=>{
-        //res.render('app.ejs',{name: "Soumya"})
-    })
-
     app.use(express.static(__dirname+'/public'))
-    
-    //teacher use
-    app.get('/teacher/login',(req,res)=>{
-        res.render('login.ejs')
+
+    app.get('/',(req,res)=>{
+        res.render('home.ejs')
+    })
+
+    app.get('/home',(req,res)=>{
+        res.render('home.ejs')
     })
     
-    app.get('/teacher/register',(req,res)=>{
+    app.get('/login',(req,res)=>{
+        res.render('login.ejs')
+    })
+
+    app.get('/slogin',(req,res)=>{
+        res.render('slogin.ejs')
+    })
+    
+    app.get('/register',(req,res)=>{
         res.render('register.ejs')
     })
 
-    //student use
-    app.get('/student/login',(req,res)=>{
-        res.render('login.ejs')
-    })
-    
-    app.get('/student/register',(req,res)=>{
-        res.render('register.ejs')
+    app.get('/sregister',(req,res)=>{
+        res.render('sregister.ejs')
     })
 
     //teacher registration
@@ -77,8 +79,8 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
                         port: 465, // Port
                         secure: true, // this is true as port is 465
                         auth: {
-                          user: 'yourmail@gmail.com',
-                          pass: 'password'
+                            user: 'yourmail@gmail.com',
+                            pass: 'password'
                         }
                     });
     
@@ -92,9 +94,9 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     
                     transporter.sendMail(mailOptions, function(error, info){
                         if (error) {
-                          console.log(error);
+                            console.log(error);
                         } else {
-                          console.log('Email sent: ' + info.response);
+                            console.log('Email sent: ' + info.response);
                         }
                     });    
                 });
@@ -162,7 +164,6 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     })
 })
 
-//server port
 app.listen(PORT,function(req,res){
     console.log('Server is running on port: '+PORT);
 });
