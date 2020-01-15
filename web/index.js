@@ -42,15 +42,19 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         res.render('register.ejs')
     })
 
-    app.post('/register',(req,res)=>{
+    //teacher registration
+    app.post('/teacher_register',(req,res)=>{
         let userData=req.body;
         teachers.find({email:userData.email}).toArray(function(err,response){
             if(!response[0]){
+
+                //insert into db
                 teachers.insert(userData,function(){
                     data={success:1};
                     res.status(200).send(data)
                     console.log(userData)
 
+                    //Checking validity of teacher's mail id 
                     let verifier = new Verifier('at_MvCy1d8k9nBYSTQec717nWmVOZhfu')
                     verifier.verify(userData.email, (err, data) => {
                         if (err) throw err;
@@ -68,6 +72,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
                         }
                     });
     
+                    //sending varification code(OTP) to teacher
                     var mailOptions = {
                         from: 'yourmail@gmail.com',
                         to: userData.email,
@@ -90,7 +95,28 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         });
     });
 
-    app.post('/login',(req,res)=>{
+    //student registration
+    app.post('/student_register',(req,res)=>{
+        let userData=req.body;
+        students.find({contact:userData.contact,roll:userData.roll}).toArray(function(err,response){
+            if(!response[0]){
+
+                //insert into db
+                students.insert(userData,function(){
+                    data={success:1};
+                    res.status(200).send(data)
+                    console.log(userData)
+
+                });
+            }else{
+                data={success:0};
+                res.status(200).send(data);
+            }
+        });
+    });
+
+    //teacher login
+    app.post('/teacher_login',(req,res)=>{
         let userData=req.body;
 
         if(userData.email!=""){
@@ -106,8 +132,27 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
             });
         }
     })
+
+    //student login
+    app.post('/student_login',(req,res)=>{
+        let userData=req.body;
+
+        if(userData.roll!=""){
+            students.find({roll:userData.roll}).toArray(function(err,response){
+                if(!response[0]){
+                    var data={success:0};
+                    res.status(200).send(data);
+                }else{
+                    var data=response[0]
+                    res.status(200).send(data);
+                    console.log(data)
+                }
+            });
+        }
+    })
 })
 
+//server port
 app.listen(PORT,function(req,res){
     console.log('Server is running on port: '+PORT);
 });
