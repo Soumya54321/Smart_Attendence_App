@@ -34,11 +34,21 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
 
     app.use(express.static(__dirname+'/public'))
     
-    app.get('/login',(req,res)=>{
+    //teacher use
+    app.get('/teacher/login',(req,res)=>{
         res.render('login.ejs')
     })
     
-    app.get('/register',(req,res)=>{
+    app.get('/teacher/register',(req,res)=>{
+        res.render('register.ejs')
+    })
+
+    //student use
+    app.get('/student/login',(req,res)=>{
+        res.render('login.ejs')
+    })
+    
+    app.get('/student/register',(req,res)=>{
         res.render('register.ejs')
     })
 
