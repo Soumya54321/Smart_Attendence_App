@@ -27,6 +27,13 @@ body{
     border-color: #1A1A47;
 }
 
+.custom-file-label{
+    width: 20%;
+}
+.custom-file-input{
+    width: 20%;
+}
+
 .navbar-brand{
     padding-right: 20px;
     text-align: center;

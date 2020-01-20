@@ -38,23 +38,39 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         res.render('home.ejs')
     })
     
-    app.get('/login',(req,res)=>{
-        res.render('login.ejs')
-    })
-
-    app.get('/slogin',(req,res)=>{
-        res.render('slogin.ejs')
-    })
-    
-    app.get('/register',(req,res)=>{
+    //Teacher part
+    app.get('/teacher/register',(req,res)=>{
         res.render('register.ejs')
     })
 
-    app.get('/sregister',(req,res)=>{
+    app.get('/teacher/login',(req,res)=>{
+        res.render('login.ejs')
+    })
+
+    app.get('/teacher/dashboard',(req,res)=>{
+        res.render('dashboard.ejs')
+    })
+
+
+
+    
+    //Student part
+    app.get('/student/login',(req,res)=>{
+        res.render('slogin.ejs')
+    })
+
+    app.get('/student/register',(req,res)=>{
         res.render('sregister.ejs')
     })
 
-    //teacher registration
+    app.get('/student/dashboard',(req,res)=>{
+        res.render('sdashboard.ejs')
+    })
+
+
+
+
+    //Teacher registration
     app.post('/teacher_register',(req,res)=>{
         let userData=req.body;
         teachers.find({email:userData.email}).toArray(function(err,response){
@@ -107,7 +123,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         });
     });
 
-    //student registration
+    //Student registration
     app.post('/student_register',(req,res)=>{
         let userData=req.body;
         students.find({contact:userData.contact,roll:userData.roll}).toArray(function(err,response){
@@ -127,7 +143,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         });
     });
 
-    //teacher login
+    //Teacher login
     app.post('/teacher_login',(req,res)=>{
         let userData=req.body;
 
@@ -145,7 +161,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         }
     })
 
-    //student login
+    //Student login 
     app.post('/student_login',(req,res)=>{
         let userData=req.body;
 
@@ -161,7 +177,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
                 }
             });
         }
-    })
+    })    
 })
 
 app.listen(PORT,function(req,res){
