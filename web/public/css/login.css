@@ -1,0 +1,47 @@
+.form-control{
+    width: 30%;
+}
+
+body{
+    background-image: url('/img/wall1.png');
+    background-color: #7ECCFC;
+}
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #c5f5f6;
+}
+
+.navbar-light .navbar-brand {
+    color: #c5f5f6;
+}
+
+.btn-primary {
+    background-color:#1A1A47;
+    border-color: #1A1A47;
+}
+
+.navbar-brand{
+    padding-right: 20px;
+    text-align: center;
+    vertical-align: center;
+    font-size: 60px;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+
+.input-group{
+    width: 70%;
+    margin-left: 20%;
+    
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="navbar-brand"] {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 25px;
+    }
+  }

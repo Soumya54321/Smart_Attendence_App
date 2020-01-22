@@ -28,27 +28,61 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     teachers=db.collection('teachers');
     students=db.collection('students');
 
+    app.use(express.static(__dirname+'/public'))
+
     app.get('/',(req,res)=>{
-        //res.render('app.ejs',{name: "Soumya"})
+        res.render('home.ejs')
+    })
+
+    app.get('/home',(req,res)=>{
+        res.render('home.ejs')
     })
     
-    app.get('/login',(req,res)=>{
-        res.render('login.ejs')
-    })
-    
-    app.get('/register',(req,res)=>{
+    //Teacher part
+    app.get('/teacher/register',(req,res)=>{
         res.render('register.ejs')
     })
 
-    app.post('/register',(req,res)=>{
+    app.get('/teacher/login',(req,res)=>{
+        res.render('login.ejs')
+    })
+
+    app.get('/teacher/dashboard',(req,res)=>{
+        res.render('dashboard.ejs')
+    })
+
+
+
+    
+    //Student part
+    app.get('/student/login',(req,res)=>{
+        res.render('slogin.ejs')
+    })
+
+    app.get('/student/register',(req,res)=>{
+        res.render('sregister.ejs')
+    })
+
+    app.get('/student/dashboard',(req,res)=>{
+        res.render('sdashboard.ejs')
+    })
+
+
+
+
+    //Teacher registration
+    app.post('/teacher_register',(req,res)=>{
         let userData=req.body;
         teachers.find({email:userData.email}).toArray(function(err,response){
             if(!response[0]){
+
+                //insert into db
                 teachers.insert(userData,function(){
                     data={success:1};
                     res.status(200).send(data)
                     console.log(userData)
 
+                    //Checking validity of teacher's mail id 
                     let verifier = new Verifier('at_MvCy1d8k9nBYSTQec717nWmVOZhfu')
                     verifier.verify(userData.email, (err, data) => {
                         if (err) throw err;
@@ -61,11 +95,12 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
                         port: 465, // Port
                         secure: true, // this is true as port is 465
                         auth: {
-                          user: 'yourmail@gmail.com',
-                          pass: 'password'
+                            user: 'yourmail@gmail.com',
+                            pass: 'password'
                         }
                     });
     
+                    //sending varification code(OTP) to teacher
                     var mailOptions = {
                         from: 'yourmail@gmail.com',
                         to: userData.email,
@@ -75,9 +110,9 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     
                     transporter.sendMail(mailOptions, function(error, info){
                         if (error) {
-                          console.log(error);
+                            console.log(error);
                         } else {
-                          console.log('Email sent: ' + info.response);
+                            console.log('Email sent: ' + info.response);
                         }
                     });    
                 });
@@ -88,7 +123,28 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         });
     });
 
-    app.post('/login',(req,res)=>{
+    //Student registration
+    app.post('/student_register',(req,res)=>{
+        let userData=req.body;
+        students.find({contact:userData.contact,roll:userData.roll}).toArray(function(err,response){
+            if(!response[0]){
+
+                //insert into db
+                students.insert(userData,function(){
+                    data={success:1};
+                    res.status(200).send(data)
+                    console.log(userData)
+
+                });
+            }else{
+                data={success:0};
+                res.status(200).send(data);
+            }
+        });
+    });
+
+    //Teacher login
+    app.post('/teacher_login',(req,res)=>{
         let userData=req.body;
 
         if(userData.email!=""){
@@ -104,6 +160,24 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
             });
         }
     })
+
+    //Student login 
+    app.post('/student_login',(req,res)=>{
+        let userData=req.body;
+
+        if(userData.roll!=""){
+            students.find({roll:userData.roll}).toArray(function(err,response){
+                if(!response[0]){
+                    var data={success:0};
+                    res.status(200).send(data);
+                }else{
+                    var data=response[0]
+                    res.status(200).send(data);
+                    console.log(data)
+                }
+            });
+        }
+    })    
 })
 
 app.listen(PORT,function(req,res){
