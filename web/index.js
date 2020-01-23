@@ -24,9 +24,11 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     if(err ) throw err;
     console.log('Connected to mongodb');
 
+    //Create collections
     var db = client.db('institute');
     teachers=db.collection('teachers');
     students=db.collection('students');
+    attendence=db.collection('year_2020');
 
     app.use(express.static(__dirname+'/public'))
 
@@ -37,6 +39,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     app.get('/home',(req,res)=>{
         res.render('home.ejs')
     })
+
     
     //Teacher part
     app.get('/teacher/register',(req,res)=>{
@@ -51,8 +54,6 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         res.render('dashboard.ejs')
     })
 
-
-
     
     //Student part
     app.get('/student/login',(req,res)=>{
@@ -66,8 +67,6 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     app.get('/student/dashboard',(req,res)=>{
         res.render('sdashboard.ejs')
     })
-
-
 
 
     //Teacher registration
@@ -95,8 +94,8 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
                         port: 465, // Port
                         secure: true, // this is true as port is 465
                         auth: {
-                            user: 'yourmail@gmail.com',
-                            pass: 'password'
+                          user: 'yourmain@gmail.com',
+                          pass: 'password'
                         }
                     });
     
@@ -166,7 +165,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         let userData=req.body;
 
         if(userData.roll!=""){
-            students.find({roll:userData.roll}).toArray(function(err,response){
+            students.find(userData).toArray(function(err,response){
                 if(!response[0]){
                     var data={success:0};
                     res.status(200).send(data);
@@ -177,9 +176,27 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
                 }
             });
         }
-    })    
+    }) 
+    
+    //attendence collection
+    app.post('/search',(req,res)=>{
+        let userData=req.body;
+
+        if(userData.length()!=0){
+            attendence.find(userData).toArray(function(err,response){
+                if(!response[0]){
+                    var data={success:0};
+                    res.status(200).send(data);
+                }else{
+                    res.status(200).send(response);
+                    console.log(response);
+                }
+            })
+        }
+    })
 })
 
+//server port
 app.listen(PORT,function(req,res){
     console.log('Server is running on port: '+PORT);
 });
