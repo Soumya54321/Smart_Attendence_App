@@ -1,0 +1,12 @@
+DB name ~ institute
+
+collections ~ teachers, students,year_2020
+
+students :
+    name, department,year,roll,contact,password
+    
+teachers :
+    name, department,contact,email,password
+    
+year_2020 :
+    roll,department, section, date, subject,teacher, year
