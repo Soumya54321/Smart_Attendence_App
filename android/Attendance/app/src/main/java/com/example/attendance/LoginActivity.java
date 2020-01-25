@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
         editTextEmail = findViewById(R.id.edit_text_email);
         editTextPassword = findViewById(R.id.edit_text_password);
-        textView_error = findViewById(R.id.text_view_error);
+        //textView_error = findViewById(R.id.text_view_error);
 
         login_btn = findViewById(R.id.login_btn);
 
@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(!response.isSuccessful()){
-                    textView_error.setText("Code"+response.code());
+                    //textView_error.setText("Code"+response.code());
                     return;
                 }
 
