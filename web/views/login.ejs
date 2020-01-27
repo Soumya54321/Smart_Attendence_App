@@ -37,7 +37,7 @@
 				<div class="p-2 bd-highlight">
 					
 				</div>
-                <form id="login_form" method="POST" action="/teacher_login">
+                <form id="login_form" >
                     <div class="form-group">
                         <label for="exampleInputEmail1"><strong>Email address</strong></label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
@@ -46,7 +46,7 @@
                         <label for="exampleInputPassword1"><strong>Password</strong></label>
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary" onClick="save()">Login</button>
                 </form>
             </div>
         </div>
@@ -55,7 +55,37 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-		
+		<script>
+			
+			async function save(){
+				var email=document.getElementById("exampleInputEmail1").value
+				var pass=document.getElementById("exampleInputPassword1").value
+				window.localStorage.setItem('email',email)
+
+				var data={
+					email:email,
+					password: pass
+				}
+
+				var url="http://localhost:3000/teacher_login"
+
+				// let fetchData = { 
+				// 	method: 'POST', 
+				// 	body: data
+				// 	//headers: new Headers()
+				// }
+				const response = await fetch("http://localhost:3000/teacher_login" , {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+            	})
+				const resp = await response.json()
+				window.localStorage.setItem('user',resp.name)
+				//console.log(resp)
+		}
+		</script>
 
 	</body>
 </html>

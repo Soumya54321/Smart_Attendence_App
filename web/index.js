@@ -173,8 +173,9 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
                     var data=response[0]
                     res.status(200).send(data);
                     console.log(data)
+                    //res.redirect('/student/dashboard')   
                 }
-            });
+            })
         }
     }) 
     
