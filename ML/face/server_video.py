@@ -1,5 +1,5 @@
 import os
-from flask import Flask, flash, request, redirect, render_template,jsonify
+from flask import Flask, flash, request, redirect, render_template, jsonify
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = './uploads'
@@ -9,9 +9,7 @@ app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024
 
-
-
-ALLOWED_EXTENSIONS = set(['mp4','3gp'])
+ALLOWED_EXTENSIONS = set(['mp4', '3gp', 'avi'])
 
 
 def allowed_file(filename):
@@ -28,6 +26,11 @@ def upload_form():
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
+        data = request.form
+        dept = data['dept']
+        year = data['year']
+        section = data['section']
+        print(dept, year, section)
         if 'file' not in request.files:
             return jsonify({"success": "false"})
         file = request.files['file']
