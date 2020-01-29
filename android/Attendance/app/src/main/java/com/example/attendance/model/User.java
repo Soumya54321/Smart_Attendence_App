@@ -3,6 +3,8 @@ package com.example.attendance.model;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
+    @SerializedName("sucess")
+    private String success;
     @SerializedName("_id")
     private String id;
     @SerializedName("email")
@@ -37,5 +39,9 @@ public class User {
 
     public String getDept() {
         return dept;
+    }
+
+    public String getSuccess() {
+        return success;
     }
 }

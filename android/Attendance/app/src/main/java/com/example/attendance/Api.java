@@ -5,6 +5,7 @@ import com.example.attendance.model.User;
 
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Multipart;
@@ -18,5 +19,8 @@ public interface Api {
 
     @Multipart
     @POST("upload")
-    Call<Result> upload(@Part MultipartBody.Part file);
+    Call<Result> upload(@Part MultipartBody.Part file,
+                        @Part("dept") RequestBody dept,
+                        @Part("year") RequestBody year,
+                        @Part("section") RequestBody section);
 }

@@ -9,8 +9,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -31,7 +33,6 @@ import java.util.Locale;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,8 +45,10 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     Button btn_pic, upload_btn;
     VideoView videoView;
-
+    Spinner dept_spinner, year_spinner, sec_spinner;
     Uri videoUri;
+
+    String dept, year, section;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
         btn_pic = findViewById(R.id.btn_pic);
         videoView = findViewById(R.id.videoView);
         videoView.setVisibility(View.INVISIBLE);
+        dept_spinner = findViewById(R.id.dept_spinner);
+        year_spinner = findViewById(R.id.year_spinner);
+        sec_spinner = findViewById(R.id.sec_spinner);
 
         if (!new SharedPrefs().getLoggedInStatus(MainActivity.this)) {
             startActivity(new Intent(this, LoginActivity.class));
@@ -77,6 +83,51 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 uploadFile();
+            }
+        });
+
+        ArrayAdapter<CharSequence> dept_adapter = ArrayAdapter.createFromResource(this, R.array.dept, android.R.layout.simple_spinner_item);
+        dept_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dept_spinner.setAdapter(dept_adapter);
+        dept_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                dept = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        ArrayAdapter<CharSequence> year_adapter = ArrayAdapter.createFromResource(this, R.array.year, android.R.layout.simple_spinner_item);
+        year_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        year_spinner.setAdapter(year_adapter);
+        year_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                year = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        ArrayAdapter<CharSequence> section_adapter = ArrayAdapter.createFromResource(this, R.array.section, android.R.layout.simple_spinner_item);
+        section_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sec_spinner.setAdapter(section_adapter);
+        sec_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                section = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -144,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void uploadFile() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.29.12:5001/")
+                .baseUrl("http://10.0.2.2:5001/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api = retrofit.create(Api.class);
@@ -161,8 +212,12 @@ public class MainActivity extends AppCompatActivity {
 
         MultipartBody.Part partFile = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
+        RequestBody deptPart = RequestBody.create(MediaType.parse(""));
+        RequestBody yearPart = RequestBody.create(MediaType.parse("multipart/form-data"), year);
+        RequestBody sectionPart = RequestBody.create(MediaType.parse("multipart/form-data"), section);
 
-        Call<Result> call = api.upload(partFile);
+
+        Call<Result> call = api.upload(partFile, deptPart, yearPart, sectionPart);
 
         call.enqueue(new Callback<Result>() {
             @Override

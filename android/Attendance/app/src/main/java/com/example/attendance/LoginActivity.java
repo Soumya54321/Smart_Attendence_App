@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(User user) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.29.12:3000/")
+                .baseUrl("http://10.0.2.2:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -79,15 +79,20 @@ public class LoginActivity extends AppCompatActivity {
 
                 User userResponse = response.body();
 
-                String name = userResponse.getName();
+                if(userResponse.getSuccess().equals("true")){
+                    String name = userResponse.getName();
 //                System.out.println("EMAIL:"+email);
 
-                SharedPrefs sharedPrefs = new SharedPrefs();
-                sharedPrefs.setLoggedIn(LoginActivity.this);
-                sharedPrefs.setEmail(LoginActivity.this, name);
+                    SharedPrefs sharedPrefs = new SharedPrefs();
+                    sharedPrefs.setLoggedIn(LoginActivity.this);
+                    sharedPrefs.setEmail(LoginActivity.this, name);
 
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("department", userResponse.getDept());
+
+                    startActivity(intent);
+                    finish();
+                }
             }
 
             @Override
