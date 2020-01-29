@@ -40,10 +40,24 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         res.render('home.ejs')
     })
 
+    //Admin part
+    app.get('/admin/login',(req,res)=>{
+        res.render('alogin.ejs')
+    })
+    app.get('/admin/teacher/register',(req,res)=>{
+        res.render('register.ejs')
+    })
+    app.get('/admin/student/register',(req,res)=>{
+        res.render('sregister.ejs')
+    })
+    app.get('/admin/dashboard',(req,res)=>{
+        res.render('adashboard.ejs')
+    })
+
     
     //Teacher part
     app.get('/teacher/register',(req,res)=>{
-        res.render('register.ejs')
+        res.render('iregister.ejs')
     })
 
     app.get('/teacher/login',(req,res)=>{
@@ -61,7 +75,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     })
 
     app.get('/student/register',(req,res)=>{
-        res.render('sregister.ejs')
+        res.render('isregister.ejs')
     })
 
     app.get('/student/dashboard',(req,res)=>{

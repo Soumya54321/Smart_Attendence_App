@@ -44,6 +44,7 @@ function mFunction() {
         document.getElementById("exampleInputName").disabled=true;
         document.getElementById("exampleInputDepartment").disabled=true;
         document.getElementById("exampleInputYear").disabled=true;
+        document.getElementById("exampleInputSection").disabled=true;
         document.getElementById("exampleInputRoll").disabled=true;
         document.getElementById("exampleInputContact").disabled=true;
         document.getElementById("exampleInputEmail1").disabled=true;
