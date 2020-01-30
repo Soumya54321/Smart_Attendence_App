@@ -6,6 +6,12 @@ const cors=require('cors');
 const mongo = require('mongodb').MongoClient;
 var nodemailer = require('nodemailer');
 const Verifier = require("email-verifier");
+var http = require("http");
+//var LocalStorage = require('node-localstorage').LocalStorage;
+//localStorage = new LocalStorage('./scratch');
+var localStorage = require('localStorage');
+const url = require('url');
+var store = require('store')
 
 const PORT=3000;
 //const api=require('./routes/api');
