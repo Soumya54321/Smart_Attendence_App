@@ -1,24 +1,6 @@
 var n;
 var n1;
 
-/* $('.form-check-input').on('change', function() {
-    $('.form-check-input').not(this).prop('checked', false);  
-});
-
-function check() {
-    if(document.getElementById("check1").checked){
-        document.getElementById("register_form").style.visibility = "visible";
-        document.getElementById("register_form1").style.visibility = "hidden";
-
-    }
-    if(document.getElementById("check2").checked){
-        document.getElementById("register_form1").style.visibility = "visible";
-        document.getElementById("register_form").style.visibility = "hidden";
-        
-    }
-    
-} */
-
 
 function limit(){
     var str1;
@@ -41,15 +23,7 @@ function mFunction() {
         
         document.getElementById("abc").style.visibility = "hidden";
         document.getElementById("abcd").style.visibility = "visible";
-        document.getElementById("exampleInputName").disabled=true;
-        document.getElementById("exampleInputDepartment").disabled=true;
-        document.getElementById("exampleInputYear").disabled=true;
-        document.getElementById("exampleInputSection").disabled=true;
-        document.getElementById("exampleInputRoll").disabled=true;
-        document.getElementById("exampleInputContact").disabled=true;
-        document.getElementById("exampleInputEmail1").disabled=true;
-        document.getElementById("exampleInputPassword1").disabled=true;
-        document.getElementById("exampleInputPassword2").disabled=true;
+        document.getElementsByTagName("INPUT").disabled=true;
     
     }
     else{
