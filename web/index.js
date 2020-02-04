@@ -48,44 +48,44 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
 
     //Admin part
     app.get('/admin/login',(req,res)=>{
-        res.render('alogin.ejs')
+        res.render('login_admin.ejs')
     })
     app.get('/admin/teacher/register',(req,res)=>{
-        res.render('register.ejs')
+        res.render('register_admin_teacher.ejs')
     })
     app.get('/admin/student/register',(req,res)=>{
-        res.render('sregister.ejs')
+        res.render('register_admin_student.ejs')
     })
     app.get('/admin/dashboard',(req,res)=>{
-        res.render('adashboard.ejs')
+        res.render('dashboard_admin.ejs')
     })
 
     
     //Teacher part
     app.get('/teacher/register',(req,res)=>{
-        res.render('iregister.ejs')
+        res.render('register_teacher.ejs')
     })
 
     app.get('/teacher/login',(req,res)=>{
-        res.render('login.ejs')
+        res.render('login_teacher.ejs')
     })
 
     app.get('/teacher/dashboard',(req,res)=>{
-        res.render('dashboard.ejs')
+        res.render('dashboard_teacher.ejs')
     })
 
     
     //Student part
     app.get('/student/login',(req,res)=>{
-        res.render('slogin.ejs')
+        res.render('login_student.ejs')
     })
 
     app.get('/student/register',(req,res)=>{
-        res.render('isregister.ejs')
+        res.render('register_student.ejs')
     })
 
     app.get('/student/dashboard',(req,res)=>{
-        res.render('sdashboard.ejs')
+        res.render('dashboard_student.ejs')
     })
 
 
