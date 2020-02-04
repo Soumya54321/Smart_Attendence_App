@@ -221,8 +221,8 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     app.post('/search',(req,res)=>{
         let userData=req.body;
 
-        if(userData.length()!=0){
-            attendence.find(userData).toArray(function(err,response){
+        //if(userData.length()!=0){
+            attendance.find(userData).toArray(function(err,response){
                 if(!response[0]){
                     var data={success:0};
                     res.status(200).send(data);
@@ -231,7 +231,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
                     console.log(response);
                 }
             })
-        }
+        //}
     })
 })
 

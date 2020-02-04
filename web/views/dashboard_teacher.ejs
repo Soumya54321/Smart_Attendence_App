@@ -25,58 +25,50 @@
                     <li class="nav-item active">
 						<a class="nav-link lead" href="#">Logout</a>
                     </li>
-				</ul>
+                </ul>
+                <form class="form-inline my-2 my-lg-0 pl-3" method="POST" action="/search">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                </form>
 			</div>
         </nav>
 
-        <!-- <div class="d-flex flex-column bd-highlight mb-3">
-            <div class="p-5 bd-highlight fit-to-screen">
-                <p class="text-center"><h3>Faculty Image Upload</h3></p>
-                
-                    <form id="register_form" method="POST" action="/upload_teacher" enctype="multipart/form-data">
-                        <div class="custom-file mb-3">
-                            <label for="exampleInputImage" class="custom-file-label"><strong>Choose file</strong></label>
-                            <input type="file" id="exampleInputFile" name="File" class="custom-file-input" required>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary" id="abcd" value="Submit">Upload</button>
-                        </div>
-                    </form>
-                
-            </div>
+        <div class="m-5">
+            
+            <h1>Attendance Details</h1>
+
+            <div id="piechart"></div>
+    
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+            <script type="text/javascript">
+            // Load google charts
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+    
+            // Draw the chart and set the chart values
+            function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Work', 8],
+            ['Eat', 2],
+            ['TV', 30],
+            ['Gym', 2],
+            ['Sleep', 8]
+            ]);
+    
+            // Optional; add a title and set the width and height of the chart
+            var options = {'title':'My Average Day', 'width':550, 'height':400};
+    
+            // Display the chart inside the <div> element with id="piechart"
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+            }
+            </script>    
+
         </div>
-         -->
 
-         <h1>Attendance Details</h1>
-
-        <div id="piechart"></div>
-
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-        <script type="text/javascript">
-        // Load google charts
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-
-        // Draw the chart and set the chart values
-        function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-        ['Task', 'Hours per Day'],
-        ['Work', 8],
-        ['Eat', 2],
-        ['TV', 30],
-        ['Gym', 2],
-        ['Sleep', 8]
-        ]);
-
-        // Optional; add a title and set the width and height of the chart
-        var options = {'title':'My Average Day', 'width':550, 'height':400};
-
-        // Display the chart inside the <div> element with id="piechart"
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-        chart.draw(data, options);
-        }
-        </script>
+        
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

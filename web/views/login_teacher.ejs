@@ -83,6 +83,8 @@
             	})
 				const resp = await response.json()
 				window.localStorage.setItem('user',resp.name)
+				window.localStorage.setItem('email',resp.email)
+				window.location.href="/teacher/dashboard"
 				//console.log(resp)
 		}
 		</script>
