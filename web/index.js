@@ -7,15 +7,21 @@ const mongo = require('mongodb').MongoClient;
 var nodemailer = require('nodemailer');
 const Verifier = require("email-verifier");
 var http = require("http");
-//var LocalStorage = require('node-localstorage').LocalStorage;
-//localStorage = new LocalStorage('./scratch');
-var localStorage = require('localStorage');
-const url = require('url');
-var store = require('store')
+var multer  =   require('multer');
+var fs = require("fs");
 
 const PORT=3000;
 //const api=require('./routes/api');
 //app.use('/api',api);
+
+var storage =   multer.diskStorage({
+    destination:'./allImages/',
+    filename: function (req, file, callback) {
+        callback(null, file.originalname);
+    }
+});
+
+var upload = multer({ storage : storage});
 
 app.set('view-engine','ejs')
 app.use(express.urlencoded({extended:false}))
@@ -91,10 +97,11 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
 
     //Teacher registration
     app.post('/teacher_register',(req,res)=>{
+        
         let userData=req.body;
+       
         teachers.find({email:userData.email}).toArray(function(err,response){
-            if(!response[0]){
-
+           if(!response[0]){
                 //insert into db
                 teachers.insert(userData,function(){
                     data={success:1};
@@ -133,7 +140,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
                         } else {
                             console.log('Email sent: ' + info.response);
                         }
-                    });    
+                    });   
                 });
             }else{
                 data={success:0};
@@ -143,7 +150,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     });
 
     //Student registration
-    app.post('/student_register',(req,res)=>{
+    app.post('/student_register',upload.single('image'),(req,res)=>{
         let userData=req.body;
         students.find({contact:userData.contact,roll:userData.roll}).toArray(function(err,response){
             if(!response[0]){
@@ -192,13 +199,19 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         if(userData.roll!=""){
             students.find(userData).toArray(function(err,response){
                 if(!response[0]){
-                    var data={success:0};
-                    res.status(200).send(data);
+                    data={
+                        success: false
+                    }
+                    res.status(200).send(data)
                 }else{
                     var data=response[0]
-                    res.status(200).send(data);
-                    console.log(data)
-                    //res.redirect('/student/dashboard')   
+                    data={
+                        success: true,
+                        roll:response[0].roll,
+                        name:response[0].name
+                    }
+                    console.log(response[0])
+                    res.status(200).send(data)
                 }
             })
         }

@@ -37,7 +37,7 @@
 				<div class="p-2 bd-highlight">
 					
 				</div>
-                <form id="login_form" method="POST" action="/student_login">
+                <form id="login_form">
                     <div class="form-group">
 						<label for="exampleInputRoll"><strong>Roll number</strong></label>
                         <input type="text" class="form-control" id="exampleInputRoll" placeholder="Enter roll" name="roll">
@@ -46,7 +46,7 @@
                         <label for="exampleInputPassword1"><strong>Password</strong></label>
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary" onClick="save()">Login</button>
                 </form>
             </div>
         </div>
@@ -55,7 +55,37 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-		
+		<script>
+			
+			async function save(){
+				var roll=document.getElementById("exampleInputRoll").value
+				var pass=document.getElementById("exampleInputPassword1").value
+
+				var data={
+					roll:roll,
+					password: pass
+				}
+
+				var url="http://localhost:3000/student_login"
+				const response = await fetch(url , {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+            	})
+				const resp = await response.json()
+				if (resp.success==false){
+					window.location.href="/student/login"
+					window.alert("Error: Your Roll number or Password may be wrong")
+				}else{
+					window.localStorage.setItem('user',resp.name)
+					window.localStorage.setItem('roll',resp.roll)
+					window.location.href="/student/dashboard"
+				}
+				
+		}
+		</script>
 
 	</body>
 </html>
