@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(User user) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/")
+                .baseUrl("http://192.168.43.126:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                textView_error.setText(t.getMessage());
+                Toast.makeText(LoginActivity.this, "internet not available", Toast.LENGTH_SHORT).show();
             }
         });
     }

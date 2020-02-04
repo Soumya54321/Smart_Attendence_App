@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void uploadFile() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:5001/")
+                .baseUrl("http://192.168.43.126:5001/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api api = retrofit.create(Api.class);
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
 
         MultipartBody.Part partFile = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-        RequestBody deptPart = RequestBody.create(MediaType.parse(""));
+        RequestBody deptPart = RequestBody.create(MediaType.parse("multipart/form-data"),dept);
         RequestBody yearPart = RequestBody.create(MediaType.parse("multipart/form-data"), year);
         RequestBody sectionPart = RequestBody.create(MediaType.parse("multipart/form-data"), section);
 

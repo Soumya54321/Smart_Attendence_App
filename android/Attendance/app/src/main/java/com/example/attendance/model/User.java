@@ -3,7 +3,7 @@ package com.example.attendance.model;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
-    @SerializedName("sucess")
+    @SerializedName("success")
     private String success;
     @SerializedName("_id")
     private String id;

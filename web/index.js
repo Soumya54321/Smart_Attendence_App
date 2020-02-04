@@ -167,12 +167,17 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         let userData=req.body;
 
         if(userData.email!=""){
-            teachers.find({email:userData.email}).toArray(function(err,response){
+            teachers.find({email:userData.email,
+                           password: userData.password}).toArray(function(err,response){
                 if(!response[0]){
-                    var data={success:0};
+                    var data={success:false};
                     res.status(200).send(data);
                 }else{
-                    var data=response[0]
+                    var data={success: true, 
+                        id:response[0]._id,
+                        email: response[0].email,
+                        name: response[0].name,
+                        dept: response[0].department}
                     res.status(200).send(data);
                     console.log(data)
                 }
