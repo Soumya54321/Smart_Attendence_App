@@ -14,11 +14,11 @@ import retrofit2.http.Part;
 
 public interface Api {
 
-    @POST("teacher_login")
+    @POST("/teacher_login")
     Call<User> login(@Body User user);
 
     @Multipart
-    @POST("upload")
+    @POST("/upload")
     Call<Result> upload(@Part MultipartBody.Part file,
                         @Part("dept") RequestBody dept,
                         @Part("year") RequestBody year,

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,14 +14,11 @@ import com.example.attendance.model.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText editTextEmail, editTextPassword;
     Button login_btn;
-    TextView textView_error;
 
 
 
@@ -58,12 +54,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(User user) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.43.126:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        Api api = retrofit.create(Api.class);
+        Api api = RetrofitFactory.getRetrofit("3000").create(Api.class);
 
 //        System.out.println("INSIDE LOGIN"+user.getEmail());
 
