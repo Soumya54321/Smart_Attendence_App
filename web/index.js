@@ -41,6 +41,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     teachers=db.collection('teachers');
     students=db.collection('students');
     attendance=db.collection('year_2020');
+    admin=db.collection('admin');
 
     app.use(express.static(__dirname+'/public'))
 
@@ -169,6 +170,25 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         });
     });
 
+    //Admin login
+    app.post('/admin_login',(req,res)=>{
+        let userData=req.body;
+
+        admin.find(userData).toArray(function(err,response){
+            console.log(response[0])
+            if(!response[0]){
+                var data={success:false};
+                res.status(200).send(data);
+            }else{
+                var data={
+                    success:true,
+                    key:response[0].key
+                }
+                res.status(200).send(data);
+            }
+        })
+    })
+
     //Teacher login
     app.post('/teacher_login',(req,res)=>{
         let userData=req.body;
@@ -180,8 +200,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
                     var data={success:false};
                     res.status(200).send(data);
                 }else{
-                    var data={success: true, 
-                        id:response[0]._id,
+                    var data={success: true,
                         email: response[0].email,
                         name: response[0].name,
                         dept: response[0].department}
