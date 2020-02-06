@@ -40,7 +40,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
     var db = client.db('institute');
     teachers=db.collection('teachers');
     students=db.collection('students');
-    attendence=db.collection('year_2020');
+    attendance=db.collection('year_2020');
 
     app.use(express.static(__dirname+'/public'))
 
@@ -208,7 +208,8 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
                     data={
                         success: true,
                         roll:response[0].roll,
-                        name:response[0].name
+                        name:response[0].name,
+                        department:response[0].department
                     }
                     console.log(response[0])
                     res.status(200).send(data)
