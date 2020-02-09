@@ -58,6 +58,7 @@
 			async function save(){
 				var id=document.getElementById("exampleInputID").value
 
+				window.localStorage.clear()
 				var data={
 					key:id
 				}
@@ -70,14 +71,19 @@
 					},
 					body: JSON.stringify(data)
 				})
+				
+				
 				const resp = await response.json()
-				if (resp.success==false){
-					window.location.href="/admin/login"
-					window.alert("Error: Sir, please check your unique id")
-				}else{
-					window.localStorage.setItem('admin_status',resp.success)
-					window.location.href="/admin/dashboard"
-				}
+				console.log(response)
+				window.alert("Your are in")
+				// window.location.href="/admin/dashboard"
+				// if (resp.success==false){
+				// 	window.location.href="/admin/login"
+				// 	window.alert("Error: Sir, please check your unique id")
+				// }else{
+				// 	window.localStorage.setItem('admin_status',resp.success)
+				// 	window.location.href="/admin/dashboard"
+				// }
 			}
 		</script>
 

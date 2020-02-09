@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //connect with mongodb and create database
-mongo.connect('mongodb://localhost:27017/institute',function(err,client){
+mongo.connect('mongodb+srv://user:1234@cluster0-b4ebw.mongodb.net/institute?retryWrites=true&w=majority',function(err,client){
     if(err ) throw err;
     console.log('Connected to mongodb');
 
@@ -175,16 +175,18 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         let userData=req.body;
 
         admin.find(userData).toArray(function(err,response){
-            console.log(response[0])
+            
             if(!response[0]){
                 var data={success:false};
                 res.status(200).send(data);
             }else{
+                console.log(response[0])
                 var data={
                     success:true,
                     key:response[0].key
                 }
-                res.status(200).send(data);
+                console.log(data)
+                res.status(202).sned(data);
             }
         })
     })
@@ -244,7 +246,7 @@ mongo.connect('mongodb://localhost:27017/institute',function(err,client){
         //if(userData.length()!=0){
             attendance.find(userData).toArray(function(err,response){
                 if(!response[0]){
-                    var data={success:0};
+                    var data={success:false};
                     res.status(200).send(data);
                 }else{
                     res.status(200).send(response);
