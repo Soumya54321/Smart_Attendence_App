@@ -39,7 +39,7 @@
 						<label for="exampleInputID"><strong>Unique ID</strong></label>
                         <input type="text" class="form-control" id="exampleInputID" placeholder="Enter ID" name="ID">
                     </div>
-                    <button type="submit" class="btn btn-primary" onClick="save()">Login</button>
+                    <button type="submit" class="btn btn-primary" onClick="save(event)">Login</button>
                 </form>
             </div>
         </div>
@@ -55,7 +55,9 @@
 				}
 			}
 
-			async function save(){
+			async function save(event){
+				event.preventDefault();
+				
 				var id=document.getElementById("exampleInputID").value
 
 				window.localStorage.clear()
@@ -74,16 +76,16 @@
 				
 				
 				const resp = await response.json()
-				console.log(response)
-				window.alert("Your are in")
+				// console.log(resp)
+				// window.alert("Your are in")
 				// window.location.href="/admin/dashboard"
-				// if (resp.success==false){
-				// 	window.location.href="/admin/login"
-				// 	window.alert("Error: Sir, please check your unique id")
-				// }else{
-				// 	window.localStorage.setItem('admin_status',resp.success)
-				// 	window.location.href="/admin/dashboard"
-				// }
+				if (resp.success==false){
+					window.location.href="/admin/login"
+					window.alert("Error: Sir, please check your unique id")
+				}else{
+					window.localStorage.setItem('admin_status',resp.success)
+					window.location.href="/admin/dashboard"
+				}
 			}
 		</script>
 

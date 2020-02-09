@@ -171,25 +171,24 @@ mongo.connect('mongodb+srv://user:1234@cluster0-b4ebw.mongodb.net/institute?retr
     });
 
     //Admin login
-    app.post('/admin_login',(req,res)=>{
-        let userData=req.body;
+    app.post("/admin_login", (req, res) => {
+      let userData = req.body;
 
-        admin.find(userData).toArray(function(err,response){
-            
-            if(!response[0]){
-                var data={success:false};
-                res.status(200).send(data);
-            }else{
-                console.log(response[0])
-                var data={
-                    success:true,
-                    key:response[0].key
-                }
-                console.log(data)
-                res.status(202).sned(data);
-            }
-        })
-    })
+      admin.find(userData).toArray(function(err, response) {
+        if (!response[0]) {
+          var data = { success: false };
+          res.status(200).send(data);
+        } else {
+          //   console.log(response[0]);
+          var data = {
+            success: true,
+            key: response[0].key
+          };
+          //   console.log(data);
+          res.status(200).send(data);
+        }
+      });
+    });
 
     //Teacher login
     app.post('/teacher_login',(req,res)=>{
