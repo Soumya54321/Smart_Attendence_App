@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     VideoView videoView;
     Spinner dept_spinner, year_spinner, sec_spinner;
     Uri videoUri;
+    EditText editTextSubject;
 
     String dept, year, section;
 
@@ -61,13 +63,14 @@ public class MainActivity extends AppCompatActivity {
         dept_spinner = findViewById(R.id.dept_spinner);
         year_spinner = findViewById(R.id.year_spinner);
         sec_spinner = findViewById(R.id.sec_spinner);
+        editTextSubject = findViewById(R.id.edit_text_subject);
 
         if (!new SharedPrefs().getLoggedInStatus(MainActivity.this)) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
 
-        String displayString = new SharedPrefs().getEmail(MainActivity.this);
+        String displayString = getIntent().getStringExtra("teacher_name");
         textView.setText("Hello " + displayString);
 
         btn_pic.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         ArrayAdapter<CharSequence> year_adapter = ArrayAdapter.createFromResource(this, R.array.year, android.R.layout.simple_spinner_item);
         year_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         year_spinner.setAdapter(year_adapter);
@@ -128,44 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-/* code for http calling api
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
-        Call<List<User>> call = jsonPlaceHolderApi.getUsers();
-
-        call.enqueue(new Callback<List<User>>() {
-            @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                if(!response.isSuccessful()){
-                    textView.setText("Code:" + response.code());
-                    return;
-                }
-
-                List<User> users = response.body();
-                System.out.println(users);
-                for(User user: users){
-                    String content="";
-                    content += "ID:" + user.getId()+"\n";
-                    content += "Name:" + user.getName()+"\n\n";
-
-                    textView.append(content);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
-                textView.setText(t.getMessage());
-            }
-        });
- */
     }
 
     @Override
@@ -209,9 +175,18 @@ public class MainActivity extends AppCompatActivity {
         RequestBody deptPart = RequestBody.create(MediaType.parse("multipart/form-data"),dept);
         RequestBody yearPart = RequestBody.create(MediaType.parse("multipart/form-data"), year);
         RequestBody sectionPart = RequestBody.create(MediaType.parse("multipart/form-data"), section);
+        RequestBody subjectPart = RequestBody.create(MediaType.parse("multipart/form-data"),
+                                    editTextSubject.getText().toString());
+        RequestBody teacherPart = RequestBody.create(MediaType.parse("multipart/form-data"),
+                                      new SharedPrefs().getEmail(MainActivity.this));
 
 
-        Call<Result> call = api.upload(partFile, deptPart, yearPart, sectionPart);
+        Call<Result> call = api.upload(partFile,
+                                       deptPart,
+                                       yearPart,
+                                       sectionPart,
+                                       subjectPart,
+                                       teacherPart);
 
         call.enqueue(new Callback<Result>() {
             @Override

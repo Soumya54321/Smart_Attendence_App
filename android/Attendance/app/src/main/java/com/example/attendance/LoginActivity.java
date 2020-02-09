@@ -77,10 +77,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     SharedPrefs sharedPrefs = new SharedPrefs();
                     sharedPrefs.setLoggedIn(LoginActivity.this);
-                    sharedPrefs.setEmail(LoginActivity.this, name);
+                    sharedPrefs.setEmail(LoginActivity.this, userResponse.getEmail());
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("department", userResponse.getDept());
+                    intent.putExtra("teacher_name", name);
 
                     startActivity(intent);
                     finish();

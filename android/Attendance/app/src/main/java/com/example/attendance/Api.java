@@ -22,5 +22,7 @@ public interface Api {
     Call<Result> upload(@Part MultipartBody.Part file,
                         @Part("dept") RequestBody dept,
                         @Part("year") RequestBody year,
-                        @Part("section") RequestBody section);
+                        @Part("section") RequestBody section,
+                        @Part("subject") RequestBody subject,
+                        @Part("email") RequestBody email);
 }
