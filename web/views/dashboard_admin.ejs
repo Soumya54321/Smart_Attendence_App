@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>FacultyRegister</title>
+		<title>Admin Panel</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 		<link rel="stylesheet" href="/css/register.css"/>
     </head>
@@ -35,50 +35,117 @@
 			</div>
 		</nav>
 		
-		<div class="m-5">
-            
-            <h1>Attendance Details</h1>
+		<div class="container">
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <!-- Each subject attendance of a class form -->
+                        <p class="text-center"><h1>Subject-wise Performance:</h1></p>
+                        <!-- <div class="p-2 bd-highlight">
+                            
+                        </div> -->
+                        <form id="register_form1" method="POST" action="/student_register">
+                            <div class="form-group">
+                                <label for="exampleInputYear"><strong>Year</strong></label>
+                                <input type="text" class="form-control" id="exampleInputYear" placeholder="Enter Year" name="year">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputDepartment"><strong>Department</strong></label>
+                                <input type="text" class="form-control" id="exampleInputDepartment" placeholder="Enter Department" name="department">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputSection"><strong>Section</strong></label>
+                                <input type="text" class="form-control" id="exampleInputSection" placeholder="Enter Section" name="section">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFaculty"><strong>Faculty</strong></label>
+                                <input type="text" class="form-control" id="exampleInputFaculty" placeholder="Enter Faculty" name="faculty">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputSubject"><strong>Subject</strong></label>
+                                <input type="text" class="form-control" id="exampleInputSubject" placeholder="Enter Subject" name="subject">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" id="abcd" value="Create Account">Show</button>
+                            </div>
+                        </form>
 
-            <div id="piechart"></div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <!--Each subject attendance of a class listview-->
+                        <p class="text-center"><h1>Attendance Details:</h1></p>
+                        
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <!-- subjectwise class attendance form--> 
+                        <p class="text-center"><h1>Class Performance:</h1></p>
+                        <form id="register_form1" method="POST" action="/student_register">
+                            <div class="form-group">
+                                <label for="exampleInputYear"><strong>Year</strong></label>
+                                <input type="text" class="form-control" id="exampleInputYear" placeholder="Enter Year" name="year">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputDepartment"><strong>Department</strong></label>
+                                <input type="text" class="form-control" id="exampleInputDepartment" placeholder="Enter Department" name="department">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputSection"><strong>Section</strong></label>
+                                <input type="text" class="form-control" id="exampleInputSection" placeholder="Enter Section" name="section">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" id="abcd" value="Create Account">Show</button>
+                            </div>
+                        </form>
+                            
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <!-- subjectwise class attendance pie chart -->
+                        <p class="text-center"><h1>Subject-wise Details:</h1></p>
+        
     
-            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    
-            <script type="text/javascript">
-                function check(){
-                    if(!window.localStorage.getItem('admin_status')){
-					    window.location.href="/admin/login"
-				    }
-                }
+                        <div id="piechart"></div>
+                
+                        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                
+                        <script type="text/javascript">
+                        // Load google charts
+                        google.charts.load('current', {'packages':['corechart']});
+                        google.charts.setOnLoadCallback(drawChart);
+                
+                        // Draw the chart and set the chart values
+                        function drawChart() {
+                        var data = google.visualization.arrayToDataTable([
+                        ['Task', 'Hours per Day'],
+                        ['Work', 8],
+                        ['Eat', 2],
+                        ['TV', 30],
+                        ['Gym', 2],
+                        ['Sleep', 8]
+                        ]);
+                
+                        // Optional; add a title and set the width and height of the chart
+                        var options = {'title':'My Average Day', 'width': 280, 'height':280};
+                
+                        // Display the chart inside the <div> element with id="piechart"
+                        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                        chart.draw(data, options);
+                        }
+                        </script>
 
-                // Load google charts
-                google.charts.load('current', {'packages':['corechart']});
-                google.charts.setOnLoadCallback(drawChart);
-        
-                // Draw the chart and set the chart values
-                function drawChart() {
-                var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work', 8],
-                ['Eat', 2],
-                ['TV', 30],
-                ['Gym', 2],
-                ['Sleep', 8]
-                ]);
-        
-                // Optional; add a title and set the width and height of the chart
-                var options = {'title':'My Average Day', 'width':550, 'height':400};
-        
-                // Display the chart inside the <div> element with id="piechart"
-                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-                chart.draw(data, options);
-                }
-
-                //logout
-                function logout(){
-                    window.localStorage.clear()
-                }
-            </script>    
-
+                    </div>
+                </div>
+            </div>
         </div>
 		
 

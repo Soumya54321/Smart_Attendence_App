@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>StudentDetails</title>
+		<title>Student Panel</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 		<link rel="stylesheet" href="/css/register.css"/>
     </head>
@@ -29,26 +29,9 @@
 			</div>
         </nav>
 
-        <!-- <div class="d-flex flex-column bd-highlight mb-3">
-            <div class="p-5 bd-highlight fit-to-screen">
-                <p class="text-center"><h3>Student Image Upload</h3></p>
-                
-                    <form id="register_form" method="POST" action="/upload_student" enctype="multipart/form-data">
-                        <div class="custom-file mb-3">
-                            <label for="exampleInputImage" class="custom-file-label"><strong>Choose file</strong></label>
-                            <input type="file" id="exampleInputFile" name="File" class="custom-file-input" required>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary" id="abcd" value="Submit">Upload</button>
-                        </div>
-                    </form>
-                
-            </div>
-        </div> -->
-
         <div class="m-5">
             
-            <h1>Attendance Details</h1>
+            <h1>Attendance Details:</h1>
 
             <div id="piechart"></div>
     
@@ -117,7 +100,7 @@
                                 ]);
                         
                                 // Optional; add a title and set the width and height of the chart
-                                var options = {'title':'My Average Day', 'width':550, 'height':400};
+                                var options = {'title':'My Average Day', 'width':280, 'height':280};
                         
                                 // Display the chart inside the <div> element with id="piechart"
                                 var chart = new google.visualization.PieChart(document.getElementById('piechart'));

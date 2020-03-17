@@ -3,7 +3,7 @@
 }
 
 body{
-    background-image: url('/img/wall1.png');
+    /* background-image: url('/img/wall1.png'); */
     background-color: #7ECCFC;
 }
 
@@ -43,5 +43,8 @@ body{
         margin-top: 10px;
         margin-bottom: 10px;
         font-size: 25px;
+    }
+    .form-control{
+        width: 100%;
     }
   }

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>FacultyRegister</title>
+		<title>FacultyRegister:admin</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 		<link rel="stylesheet" href="/css/register.css"/>
     </head>
@@ -29,32 +29,41 @@
 			</div>
 		</nav>
 
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
 
-        <div class="d-flex flex-column bd-highlight mb-3">
-            <div class="p-5 bd-highlight fit-to-screen">
-				<p class="text-center"><h1>Faculty Registration Forum</h1></p>
-                <form id="register_form" method="POST" action="/teacher_register">
-                    <div class="form-group">
-                        <label for="exampleInputName"><strong>Name</strong></label>
-                        <input type="text" class="form-control" id="exampleInputName" placeholder="Enter name" name="name" required>
+                </div>
+                <div class="col-sm-6">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <p class="text-center"><h1>Faculty Registration Forum:</h1></p>
+                        <form id="register_form" method="POST" action="/teacher_register">
+                            <div class="form-group">
+                                <label for="exampleInputName"><strong>Name</strong></label>
+                                <input type="text" class="form-control" id="exampleInputName" placeholder="Enter name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputDepartment"><strong>Department</strong></label>
+                                <input type="text" class="form-control" id="exampleInputDepartment" placeholder="Enter department" name="department" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputContact"><strong>Contact</strong></label>
+                                <input type="text" class="form-control" id="exampleInputContact" placeholder="Enter contact number" maxlength="10" name="contact" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"><strong>Email address</strong></label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" id="abcd" value="Create Account">Register</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputDepartment"><strong>Department</strong></label>
-                        <input type="text" class="form-control" id="exampleInputDepartment" placeholder="Enter department" name="department" required>
-					</div>
-					<div class="form-group">
-                        <label for="exampleInputContact"><strong>Contact</strong></label>
-                        <input type="text" class="form-control" id="exampleInputContact" placeholder="Enter contact number" maxlength="10" name="contact" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1"><strong>Email address</strong></label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
-                        <small id="emailHelp" class="form-text text-body">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary" id="abcd" value="Create Account">Register</button>
-                    </div>
-                </form>
+                </div>
+                <div class="col-sm-3">
+
+                </div>
+
             </div>
         </div>
 
